@@ -108,7 +108,7 @@ def judge_keyoword(keywords:str)->bool:
             return False
     return True
 
-def search(data:dict, keywords:str, oridata:dict)->list:
+def search(keywords:str, oridata:dict, data:dict)->list:
     # TODO
     # processes a keyword-based search query (possibly with logical operators)
     # retrieves the best-matching records according to the search criteria   
@@ -199,7 +199,7 @@ class TestSearchFunction(unittest.TestCase):
 
     def test_and_or_mix_matching(self):
         # Test with keywords that do not match any sentence
-        result = search(self.root,"netwo (conv | activ)", self.records )  # You are allowed to change returned variables here. Still, you need to change correspondingly the unit test by yourself.
+        result = search("netwo (conv | activ)", self.records, self.root)  # You are allowed to change returned variables here. Still, you need to change correspondingly the unit test by yourself.
         expected_result = '''Output:\n1,Learning Good Features To Track,"object tracking, convolutional neural network, feature learning",Feature Extraction and Selection,2014\n2,Human action recognition based on recognition of linear patterns in action bank features using convolutional neural networks,"human action recognition, action bank features, deep convolutional network",Neural Networks I,2014\n3,A Cyclic Contrastive Divergence Learning Algorithm for High-order RBMs,"high-order rbms, cyclic contrastive divergence learning, gradient approximation, convergence, upper bound",Neural Networks I,2014\n4,Facial expression recognition using kinect depth sensor and convolutional neural networks,"convolutional neural networks (cnn), facial expression recognition",Neural Networks I,2014\n7,Human action recognition based on MOCAP information using convolution neural networks,"convolutional neural networks (cnn), motion capture (mocap)",Neural Network II,2014\n11,One-shot periodic activity recognition using Convolutional Neural Networks,"human activity recognition, convolutional neural networks (cnn)",Neural Network II,2014\n10,Adaptive restructuring of radial basis functions using integrate-and-fire neurons,"machine learning, radial basis functions, neural networks, feed-forward networks",Neural Network II,2014'''
         self.assertEqual(result, expected_result)
 

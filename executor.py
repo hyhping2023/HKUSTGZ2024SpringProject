@@ -13,7 +13,7 @@
 from data_handling import load_words_from_file, search
 from hyperpara import TEST_DATA_01, TEST_DATA_02
 
-FILE_PATH = TEST_DATA_01
+FILE_PATH = TEST_DATA_02
 
 def main():
 
@@ -24,7 +24,7 @@ def main():
         keywords = input("Enter your search (type 'quit' to exit): ")
         if keywords.lower() == 'quit':
             break
-        results = search(root,keywords, entries, )       # You are allowed to change returned variables here. Still, you need to change correspondingly the unit test by yourself.
+        results = search(keywords, entries, root)       # You are allowed to change returned variables here. Still, you need to change correspondingly the unit test by yourself.
         print(results)
 
 if __name__ == '__main__':

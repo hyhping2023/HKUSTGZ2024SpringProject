@@ -109,7 +109,7 @@ class Trie:
             index = self.find_exact(word)
         else:
             index = self.find_approximate(word)
-        if len(index)==0:
+        if len(index)==0: #if the index is empty, add the word to the cache, which means the word is not in the trie
             index[float('inf')]=[]
             self.cache.append(word)
         return index
@@ -148,7 +148,7 @@ class Trie:
                     queue.append((mytuple[0].children[item], mytuple[1] + 1, mytuple[2] + item, 0)) #if the current result doesn't end with a word, then search the next character
             else:
                 for item in mytuple[0].children.keys():
-                    queue.append((mytuple[0].children[item], mytuple[1] + 1, mytuple[2] + item, 0))     #if the current result isn't reach the requirement, continue to search the next character
+                    queue.append((mytuple[0].children[item], mytuple[1] + 1, mytuple[2] + item, 0)) #if the current result isn't reach the requirement, continue to search the next character
     
     def find_approximate(self, word, dist=ERROR_THRESHOLD) -> list: 
         #return all the possible outputs that satisfy the error threshold
@@ -165,8 +165,8 @@ class Trie:
         result = {}
         all_possible_input = self.findall(word, errors) #return all the possible input that is within the length threshold
         for item in all_possible_input:
-            num = edit_distance_spaceless(item[0],word,errors)  #edit_try(item[0],word,errors)
-            if num > errors:
+            num = edit_distance_spaceless(item[0],word,errors)
+            if num > errors: #if the error number exceeds the threshold, skip it
                 continue
             else:
                 if num not in result: #if the error number is not in the dictionary, create new key
@@ -198,9 +198,9 @@ def op_AND(a:list, b:list):
             both.append((a[i][0],a[i][1]+b[j][1]))
             i += 1
             j += 1
-        elif a[i][0] < b[j][0]:
+        elif a[i][0] < b[j][0]: #if the character in a is smaller than b, skip it 
             i += 1
-        else:
+        else: #if the character in b is smaller than a, skip it
             j += 1
     return both
 
@@ -217,11 +217,11 @@ def op_OR(a:list, b:list):
     both = [] #create a new list to store the result that a and b have in common
     single = [] #create a new list to store the result that only a or b have
     while i < len(a) and j < len(b):
-        if a[i][0] == b[j][0]: #if the characters are the same
+        if a[i][0] == b[j][0]: #if the characters are the same, add them to the "both" list
             both.append((a[i][0],min(a[i][1],b[j][1])))
             i += 1
             j += 1
-        elif a[i][0] < b[j][0]: #if the characters are not the same
+        elif a[i][0] < b[j][0]: #if the characters are not the same, add them to the "single" list
             single.append(a[i])
             i += 1
         else:

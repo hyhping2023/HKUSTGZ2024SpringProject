@@ -85,7 +85,7 @@ def main(stdscr):
             # Call the search function and display results
             if keywords == '':
                 continue
-            results = search(data, keywords, original_data)           # You are allowed to change returned variables here. Still, you need to change correspondingly the unit test by yourself.
+            results = search(keywords, original_data, data)           # You are allowed to change returned variables here. Still, you need to change correspondingly the unit test by yourself.
             result_win.clear()
             i = 0
             for line in results.split('\n'):
